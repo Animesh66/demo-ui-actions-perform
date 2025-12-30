@@ -104,7 +104,10 @@ function App() {
   return (
     <div className="app-container">
       <div className="header">
-        <h1>learnwithanimesh</h1>
+        <div className="title-container">
+          <img src="/logo.png" alt="Animesh Logo" className="app-logo" />
+          <h1>learnwithanimesh</h1>
+        </div>
         <p>a demo web application</p>
       </div>
 
