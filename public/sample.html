@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample New Tab Page</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: #79c0ff;
+        }
+
+        img {
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #30363d;
+        }
+
+        p {
+            color: #8b949e;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="new-tab-heading">Welcome to the New Tab!</h1>
+    <img id="new-tab-image" src="https://via.placeholder.com/300/79c0ff/0d1117?text=Sample+Image"
+        alt="Sample Placeholder">
+    <p id="new-tab-text">
+        This is a sample page opened in a new browser tab/window for testing Playwright's
+        <code>page.waitForEvent('popup')</code> or multi-tab context switching.
+    </p>
+</body>
+
+</html>
