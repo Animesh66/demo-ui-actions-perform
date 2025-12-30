@@ -366,38 +366,33 @@ function App() {
         <div className="card">
           <h2>📑 Windows & Tabs</h2>
           <div className="control-group">
-            <button
-              id="open-modal-btn"
-              className="btn btn-primary"
-              onClick={() => setShowModal(true)}
-            >
-              Open Modal Behavior
-            </button>
-          </div>
-        </div>
-
-        {/* Browser Tabs & Windows */}
-        <div className="card">
-          <h2>📑 Windows & Tabs</h2>
-          <div className="control-group">
-            <button
+            {/* Using an anchor tag with target="_blank" is the most common way a new tab is opened in live sites.
+                Playwright handles this as a popup event. */}
+            <a
               id="new-tab-btn"
               className="btn btn-primary"
-              onClick={() => window.open('/sample.html', '_blank')}
+              href="/sample.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
             >
-              Open New Tab
-            </button>
+              Open New Tab (Link)
+            </a>
           </div>
           <div className="control-group">
             <button
               id="new-window-btn"
               className="btn btn-secondary"
-              onClick={() => window.open('/sample.html', 'newwindow', 'width=600,height=400')}
+              onClick={() => {
+                // Opening a window with specific features forces a popup window behavior
+                const features = 'popup=yes,width=600,height=400,resizable=yes,scrollbars=yes,status=no,location=no';
+                window.open('/sample.html', 'newwindow', features);
+              }}
             >
-              Open New Window
+              Open New Window (Popup)
             </button>
           </div>
-          <p className="label">Clicks a new browser tab with a sample page with text and image.</p>
+          <p className="label">Test <code>page.waitForEvent('popup')</code> with these common patterns.</p>
         </div>
 
         {/* Specific Delayed Action */}
