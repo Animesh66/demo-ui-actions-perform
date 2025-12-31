@@ -22,6 +22,20 @@ function App() {
   const [delay, setDelay] = useState(0)
   const [inputValue, setInputValue] = useState('')
   const [showModal, setShowModal] = useState(false)
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false)
+  const [formError, setFormError] = useState('')
+
+  // Registration Form State
+  const [regForm, setRegForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    countryCode: '+1',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
+    termcheck: false
+  })
 
   // Drag State
   const [isDragging, setIsDragging] = useState(false)
@@ -101,6 +115,47 @@ function App() {
     }, 3000 + (delay * 1000)) // Base 3s + user delay
   }
 
+  const handleRegistrationSubmit = (e) => {
+    e.preventDefault()
+    setFormError('')
+
+    // Validation
+    const missingFields = []
+    if (!regForm.firstName.trim()) missingFields.push('First Name')
+    if (!regForm.lastName.trim()) missingFields.push('Last Name')
+    if (!regForm.email.trim()) missingFields.push('Email')
+    if (!regForm.password) missingFields.push('Password')
+
+    // Phone Validation: Optional, but if entered, must be 10 digits numeric
+    const phoneRegex = /^\d{10}$/
+    if (regForm.phoneNumber && !phoneRegex.test(regForm.phoneNumber)) {
+      missingFields.push('Phone Number (10 digits)')
+    }
+
+    if (missingFields.length > 0) {
+      setFormError(`Registration Failed. Please check the following fields: ${missingFields.join(', ')}`)
+      return
+    }
+
+    updateMessage('input', 'Submitting registration...')
+
+    // Random delay between 3 to 6 seconds
+    const randomDelay = Math.floor(Math.random() * (6000 - 3000 + 1) + 3000)
+
+    setTimeout(() => {
+      setShowRegistrationModal(true)
+      updateMessage('input', 'Registration Successful!')
+    }, randomDelay)
+  }
+
+  const handleRegChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setRegForm(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }))
+  }
+
   return (
     <div className="app-container">
       <div className="header">
@@ -156,21 +211,114 @@ function App() {
           </div>
         </div>
 
-        {/* Inputs */}
-        <div className="card">
-          <h2>⌨️ Input Fields</h2>
-          <div className="control-group">
-            <label className="label">Type something:</label>
-            <input
-              id="text-input"
-              type="text"
-              className="input-field"
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="Start typing..."
-            />
-            <div className="message-area" id="input-msg">{actionMessage.input}</div>
-          </div>
+        {/* Registration Form */}
+        <div className="card" style={{ gridRow: 'span 2' }}>
+          <h2>📝 Registration Form</h2>
+          <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={handleRegistrationSubmit} noValidate>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <div style={{ flex: 1 }}>
+                <label className="label">First Name <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  name="firstName"
+                  value={regForm.firstName}
+                  onChange={handleRegChange}
+                  className="input-field"
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label className="label">Last Name <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  name="lastName"
+                  value={regForm.lastName}
+                  onChange={handleRegChange}
+                  className="input-field"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="label">Email Address <span style={{ color: 'red' }}>*</span></label>
+              <input
+                name="email"
+                type="email"
+                value={regForm.email}
+                onChange={handleRegChange}
+                className="input-field"
+              />
+            </div>
+
+            <label className="label">Phone Number</label>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <select
+                name="countryCode"
+                value={regForm.countryCode}
+                onChange={handleRegChange}
+                className="input-field"
+                style={{ width: '100px' }}
+              >
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+61">🇦🇺 +61</option>
+              </select>
+              <input
+                name="phoneNumber"
+                type="tel"
+                value={regForm.phoneNumber}
+                onChange={handleRegChange}
+                className="input-field"
+                style={{ flex: 1 }}
+              />
+            </div>
+
+            <div>
+              <label className="label">Password <span style={{ color: 'red' }}>*</span></label>
+              <input
+                name="password"
+                type="password"
+                value={regForm.password}
+                onChange={handleRegChange}
+                className="input-field"
+              />
+            </div>
+            <div>
+              <label className="label">Retype Password</label>
+              <input
+                name="confirmPassword"
+                type="password"
+                value={regForm.confirmPassword}
+                onChange={handleRegChange}
+                className="input-field"
+              />
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <input
+                type="checkbox"
+                name="termcheck"
+                checked={regForm.termcheck}
+                onChange={handleRegChange}
+              />
+              <span className="label">I agree to terms</span>
+            </div>
+
+            {formError && (
+              <div style={{
+                color: 'var(--error-color)',
+                backgroundColor: 'rgba(248, 81, 73, 0.1)',
+                padding: '0.75rem',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--error-color)',
+                fontSize: '0.9rem'
+              }}>
+                {formError}
+              </div>
+            )}
+
+            <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+              Register Now
+            </button>
+          </form>
         </div>
 
         {/* Dropdowns & Toggles */}
@@ -423,6 +571,26 @@ function App() {
               onClick={() => setShowModal(false)}
             >
               Close Modal
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Registration Success Modal */}
+      {showRegistrationModal && (
+        <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
+            <p>Your account has been created successfully.</p>
+            <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
+              <p><strong>Email:</strong> {regForm.email}</p>
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowRegistrationModal(false)}
+            >
+              OK
             </button>
           </div>
         </div>
