@@ -237,6 +237,9 @@ const HomePlayground = () => {
   // Shadow DOM Ref
   const shadowHostRef = useRef(null);
 
+  // Reload simulation state
+  const [isReloading, setIsReloading] = useState(false);
+
   useEffect(() => {
     if (shadowHostRef.current && !shadowHostRef.current.shadowRoot) {
       const shadowRoot = shadowHostRef.current.attachShadow({ mode: 'open' });
@@ -656,6 +659,25 @@ const HomePlayground = () => {
           </div>
         </div>
 
+        {/* Network Emulation */}
+        <div className="card">
+          <h2>🌐 Network Simulation</h2>
+          <p className="label">Simulate a slow server response causing a delayed page load.</p>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setIsReloading(true);
+              const delay = Math.floor(Math.random() * (7000 - 5000 + 1) + 5000);
+              updateMessage('input', `Reloading in ${delay}ms...`);
+              setTimeout(() => {
+                window.location.reload();
+              }, delay);
+            }}
+          >
+            Simulate Slow Page Load (5-7s)
+          </button>
+        </div>
+
         {/* Hover */}
         <div className="card">
           <h2>👻 Hover</h2>
@@ -1051,6 +1073,15 @@ const HomePlayground = () => {
           </div>
         )
       }
+
+      {/* Loading Overlay for Slow Reload */}
+      {isReloading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+          <h3>Simulating Slow Server...</h3>
+          <p>Page will reload in a few seconds.</p>
+        </div>
+      )}
 
       {/* Toast Container */}
       <div className="toast-container">
