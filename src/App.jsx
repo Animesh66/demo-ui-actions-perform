@@ -253,24 +253,6 @@ const HomePlayground = () => {
   return (
     <>
       <div className="section-grid">
-        {/* Settings */}
-        <div className="card">
-          <h2>⚙️ Configuration</h2>
-          <div className="control-group">
-            <label className="label">Global Artificial Delay (seconds)</label>
-            <input
-              type="number"
-              className="input-field"
-              value={delay}
-              onChange={(e) => setDelay(Number(e.target.value))}
-              min="0"
-              max="10"
-              id="delay-input"
-            />
-          </div>
-          <p className="label">This delay applies to most actions to simulate lag.</p>
-        </div>
-
         {/* Click Actions */}
         <div className="card">
           <h2>🖱️ Mouse Clicks</h2>
@@ -651,8 +633,8 @@ const HomePlayground = () => {
               Open New Window (Popup)
             </button>
           </div>
-          <p className="label">Test <code>page.waitForEvent('popup')</code> with these common patterns.</p>
         </div>
+
 
         {/* Specific Delayed Action */}
         <div className="card">
@@ -668,44 +650,66 @@ const HomePlayground = () => {
           <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
         </div>
 
-      </div>
+        {/* Settings */}
+        <div className="card">
+          <h2>⚙️ Configuration</h2>
+          <div className="control-group">
+            <label className="label">Global Artificial Delay (seconds)</label>
+            <input
+              type="number"
+              className="input-field"
+              value={delay}
+              onChange={(e) => setDelay(Number(e.target.value))}
+              min="0"
+              max="10"
+              id="delay-input"
+            />
+          </div>
+          <p className="label">This delay applies to most actions to simulate lag.</p>
+        </div>
+
+      </div >
 
       {/* Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3 id="modal-title">Simple Modal</h3>
-            <p id="modal-text">This is a custom modal popup.</p>
-            <button
-              id="close-modal-btn"
-              className="btn btn-primary"
-              onClick={() => setShowModal(false)}
-            >
-              Close Modal
-            </button>
+      {
+        showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3 id="modal-title">Simple Modal</h3>
+              <p id="modal-text">This is a custom modal popup.</p>
+              <button
+                id="close-modal-btn"
+                className="btn btn-primary"
+                onClick={() => setShowModal(false)}
+              >
+                Close Modal
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Registration Success Modal */}
-      {showRegistrationModal && (
-        <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
-            <p>Your account has been created successfully.</p>
-            <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
-              <p><strong>Email:</strong> {regForm.email}</p>
+      {
+        showRegistrationModal && (
+          <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
+              <p>Your account has been created successfully.</p>
+              <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
+                <p><strong>Email:</strong> {regForm.email}</p>
+              </div>
+              <button
+                className="btn btn-primary"
+                onClick={() => setShowRegistrationModal(false)}
+              >
+                OK
+              </button>
             </div>
-            <button
-              className="btn btn-primary"
-              onClick={() => setShowRegistrationModal(false)}
-            >
-              OK
-            </button>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Toast Container */}
       <div className="toast-container">
