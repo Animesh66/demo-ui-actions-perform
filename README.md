@@ -59,8 +59,12 @@ To build the application for production (optimizing interactions and assets):
 ## 🧪 Testing with Playwright
 
 1.  Ensure the application is running (e.g., `npm run dev`).
-2.  Point your Playwright scripts to the local URL (e.g., `http://localhost:5173`).
-3.  Use the `id` attributes provided on elements (e.g., `#click-btn`, `#drop-zone`) for robust selectors.
+2.  Point your Playwright scripts to the local URL (e.g., `http://localhost:5173/home`).
+3.  **Routing**: The application now uses Client-Side Routing.
+    *   `/home`: Main playground for actions.
+    *   `/login`: Login form placeholder.
+    *   `/register`: Dedicated registration page.
+4.  Use the `id` attributes provided on elements (e.g., `#click-btn`, `#drop-zone`) for robust selectors.
 
 ## 📂 Project Structure
 
