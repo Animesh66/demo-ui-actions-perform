@@ -157,454 +157,483 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <div className="header">
-        <div className="title-container">
-          <img src="/logo.png" alt="Animesh Logo" className="app-logo" />
-          <h1>learnwithanimesh</h1>
+    <>
+      <nav className="navbar">
+        <div className="nav-content">
+          <a href="#" className="nav-brand">
+            <img src="/logo.png" alt="Logo" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
+            learnwithanimesh
+          </a>
+          <ul className="nav-links">
+            <li><a href="#" className="nav-link active">Home</a></li>
+            <li><a href="#" className="nav-link">About Us</a></li>
+            <li><a href="#" className="nav-link">Contact Us</a></li>
+            <li><a href="#" className="nav-link">Login</a></li>
+            <li><a href="#" className="nav-link btn btn-primary" style={{ padding: '0.4rem 1rem' }}>Register</a></li>
+          </ul>
         </div>
-        <p>a demo web application</p>
-      </div>
+      </nav>
 
-      <div className="section-grid">
-
-        {/* Settings */}
-        <div className="card">
-          <h2>⚙️ Configuration</h2>
-          <div className="control-group">
-            <label className="label">Global Artificial Delay (seconds)</label>
-            <input
-              type="number"
-              className="input-field"
-              value={delay}
-              onChange={(e) => setDelay(Number(e.target.value))}
-              min="0"
-              max="10"
-              id="delay-input"
-            />
+      <div className="app-container">
+        <div className="header">
+          <div className="title-container">
+            <img src="/logo.png" alt="Animesh Logo" className="app-logo" />
+            <h1>learnwithanimesh</h1>
           </div>
-          <p className="label">This delay applies to most actions to simulate lag.</p>
+          <p>a demo web application</p>
         </div>
 
-        {/* Click Actions */}
-        <div className="card">
-          <h2>🖱️ Mouse Clicks</h2>
-          <div className="control-group">
-            <button id="click-btn" className="btn btn-primary" onClick={handleSingleClick}>
-              Single Click Me
-            </button>
-            <div className="message-area" id="click-msg">{actionMessage.click}</div>
-          </div>
+        <div className="section-grid">
 
-          <div className="control-group">
-            <button id="dbl-click-btn" className="btn btn-secondary" onDoubleClick={handleDoubleClick}>
-              Double Click Me
-            </button>
-            <div className="message-area" id="dbl-click-msg">{actionMessage.doubleClick}</div>
-          </div>
-
-          <div className="control-group">
-            <button id="right-click-btn" className="btn btn-secondary" onContextMenu={handleRightClick}>
-              Right Click Me
-            </button>
-            <div className="message-area" id="right-click-msg">{actionMessage.rightClick}</div>
-          </div>
-        </div>
-
-        {/* Registration Form */}
-        <div className="card" style={{ gridRow: 'span 2' }}>
-          <h2>📝 Registration Form</h2>
-          <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={handleRegistrationSubmit} noValidate>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <div style={{ flex: 1 }}>
-                <label className="label">First Name <span style={{ color: 'red' }}>*</span></label>
-                <input
-                  name="firstName"
-                  value={regForm.firstName}
-                  onChange={handleRegChange}
-                  className="input-field"
-                />
-              </div>
-              <div style={{ flex: 1 }}>
-                <label className="label">Last Name <span style={{ color: 'red' }}>*</span></label>
-                <input
-                  name="lastName"
-                  value={regForm.lastName}
-                  onChange={handleRegChange}
-                  className="input-field"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="label">Email Address <span style={{ color: 'red' }}>*</span></label>
+          {/* Settings */}
+          <div className="card">
+            <h2>⚙️ Configuration</h2>
+            <div className="control-group">
+              <label className="label">Global Artificial Delay (seconds)</label>
               <input
-                name="email"
-                type="email"
-                value={regForm.email}
-                onChange={handleRegChange}
+                type="number"
                 className="input-field"
+                value={delay}
+                onChange={(e) => setDelay(Number(e.target.value))}
+                min="0"
+                max="10"
+                id="delay-input"
               />
             </div>
+            <p className="label">This delay applies to most actions to simulate lag.</p>
+          </div>
 
-            <label className="label">Phone Number</label>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+          {/* Click Actions */}
+          <div className="card">
+            <h2>🖱️ Mouse Clicks</h2>
+            <div className="control-group">
+              <button id="click-btn" className="btn btn-primary" onClick={handleSingleClick}>
+                Single Click Me
+              </button>
+              <div className="message-area" id="click-msg">{actionMessage.click}</div>
+            </div>
+
+            <div className="control-group">
+              <button id="dbl-click-btn" className="btn btn-secondary" onDoubleClick={handleDoubleClick}>
+                Double Click Me
+              </button>
+              <div className="message-area" id="dbl-click-msg">{actionMessage.doubleClick}</div>
+            </div>
+
+            <div className="control-group">
+              <button id="right-click-btn" className="btn btn-secondary" onContextMenu={handleRightClick}>
+                Right Click Me
+              </button>
+              <div className="message-area" id="right-click-msg">{actionMessage.rightClick}</div>
+            </div>
+          </div>
+
+          {/* Registration Form */}
+          <div className="card" style={{ gridRow: 'span 2' }}>
+            <h2>📝 Registration Form</h2>
+            <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={handleRegistrationSubmit} noValidate>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ flex: 1 }}>
+                  <label className="label">First Name <span style={{ color: 'red' }}>*</span></label>
+                  <input
+                    name="firstName"
+                    value={regForm.firstName}
+                    onChange={handleRegChange}
+                    className="input-field"
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label className="label">Last Name <span style={{ color: 'red' }}>*</span></label>
+                  <input
+                    name="lastName"
+                    value={regForm.lastName}
+                    onChange={handleRegChange}
+                    className="input-field"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="label">Email Address <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  name="email"
+                  type="email"
+                  value={regForm.email}
+                  onChange={handleRegChange}
+                  className="input-field"
+                />
+              </div>
+
+              <label className="label">Phone Number</label>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <select
+                  name="countryCode"
+                  value={regForm.countryCode}
+                  onChange={handleRegChange}
+                  className="input-field"
+                  style={{ width: '100px' }}
+                >
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+61">🇦🇺 +61</option>
+                </select>
+                <input
+                  name="phoneNumber"
+                  type="tel"
+                  value={regForm.phoneNumber}
+                  onChange={handleRegChange}
+                  className="input-field"
+                  style={{ flex: 1 }}
+                />
+              </div>
+
+              <div>
+                <label className="label">Password <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  name="password"
+                  type="password"
+                  value={regForm.password}
+                  onChange={handleRegChange}
+                  className="input-field"
+                />
+              </div>
+              <div>
+                <label className="label">Retype Password</label>
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  value={regForm.confirmPassword}
+                  onChange={handleRegChange}
+                  className="input-field"
+                />
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <input
+                  type="checkbox"
+                  name="termcheck"
+                  checked={regForm.termcheck}
+                  onChange={handleRegChange}
+                />
+                <span className="label">I agree to terms</span>
+              </div>
+
+              {formError && (
+                <div style={{
+                  color: 'var(--error-color)',
+                  backgroundColor: 'rgba(248, 81, 73, 0.1)',
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--error-color)',
+                  fontSize: '0.9rem'
+                }}>
+                  {formError}
+                </div>
+              )}
+
+              <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+                Register Now
+              </button>
+            </form>
+          </div>
+
+          {/* Dropdowns & Toggles */}
+          <div className="card">
+            <h2>🔘 Toggles & Choices</h2>
+
+            <div className="control-group">
+              <label className="label">Select Option:</label>
               <select
-                name="countryCode"
-                value={regForm.countryCode}
-                onChange={handleRegChange}
+                id="select-dropdown"
                 className="input-field"
-                style={{ width: '100px' }}
+                onChange={(e) => updateMessage('dropdown', `Selected: ${e.target.value}`)}
               >
-                <option value="+1">🇺🇸 +1</option>
-                <option value="+44">🇬🇧 +44</option>
-                <option value="+91">🇮🇳 +91</option>
-                <option value="+61">🇦🇺 +61</option>
+                <option value="">Choose one...</option>
+                <option value="Option 1">Option 1</option>
+                <option value="Option 2">Option 2</option>
+                <option value="Option 3">Option 3</option>
               </select>
-              <input
-                name="phoneNumber"
-                type="tel"
-                value={regForm.phoneNumber}
-                onChange={handleRegChange}
-                className="input-field"
-                style={{ flex: 1 }}
-              />
+              <div className="message-area" id="select-msg">{actionMessage.dropdown}</div>
             </div>
 
-            <div>
-              <label className="label">Password <span style={{ color: 'red' }}>*</span></label>
-              <input
-                name="password"
-                type="password"
-                value={regForm.password}
-                onChange={handleRegChange}
-                className="input-field"
-              />
-            </div>
-            <div>
-              <label className="label">Retype Password</label>
-              <input
-                name="confirmPassword"
-                type="password"
-                value={regForm.confirmPassword}
-                onChange={handleRegChange}
-                className="input-field"
-              />
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <input
-                type="checkbox"
-                name="termcheck"
-                checked={regForm.termcheck}
-                onChange={handleRegChange}
-              />
-              <span className="label">I agree to terms</span>
-            </div>
-
-            {formError && (
-              <div style={{
-                color: 'var(--error-color)',
-                backgroundColor: 'rgba(248, 81, 73, 0.1)',
-                padding: '0.75rem',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--error-color)',
-                fontSize: '0.9rem'
-              }}>
-                {formError}
+            <div className="control-group">
+              <label className="label">Radio Buttons:</label>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <label>
+                  <input
+                    type="radio"
+                    name="radio-group"
+                    value="Radio 1"
+                    onChange={(e) => updateMessage('radio', `Radio: ${e.target.value}`)}
+                  /> R1
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radio-group"
+                    value="Radio 2"
+                    onChange={(e) => updateMessage('radio', `Radio: ${e.target.value}`)}
+                  /> R2
+                </label>
               </div>
-            )}
-
-            <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
-              Register Now
-            </button>
-          </form>
-        </div>
-
-        {/* Dropdowns & Toggles */}
-        <div className="card">
-          <h2>🔘 Toggles & Choices</h2>
-
-          <div className="control-group">
-            <label className="label">Select Option:</label>
-            <select
-              id="select-dropdown"
-              className="input-field"
-              onChange={(e) => updateMessage('dropdown', `Selected: ${e.target.value}`)}
-            >
-              <option value="">Choose one...</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <div className="message-area" id="select-msg">{actionMessage.dropdown}</div>
-          </div>
-
-          <div className="control-group">
-            <label className="label">Radio Buttons:</label>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <label>
-                <input
-                  type="radio"
-                  name="radio-group"
-                  value="Radio 1"
-                  onChange={(e) => updateMessage('radio', `Radio: ${e.target.value}`)}
-                /> R1
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="radio-group"
-                  value="Radio 2"
-                  onChange={(e) => updateMessage('radio', `Radio: ${e.target.value}`)}
-                /> R2
-              </label>
+              <div className="message-area" id="radio-msg">{actionMessage.radio}</div>
             </div>
-            <div className="message-area" id="radio-msg">{actionMessage.radio}</div>
+
+            <div className="control-group">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  onChange={(e) => updateMessage('checkbox', e.target.checked ? 'Checked' : 'Unchecked')}
+                />
+                Check me
+              </label>
+              <div className="message-area" id="checkbox-msg">{actionMessage.checkbox}</div>
+            </div>
           </div>
 
-          <div className="control-group">
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <input
-                type="checkbox"
-                id="checkbox"
-                onChange={(e) => updateMessage('checkbox', e.target.checked ? 'Checked' : 'Unchecked')}
-              />
-              Check me
-            </label>
-            <div className="message-area" id="checkbox-msg">{actionMessage.checkbox}</div>
-          </div>
-        </div>
-
-        {/* Drag and Drop */}
-        <div className="card">
-          <h2>✋ Drag & Drop</h2>
-          <div className="control-group">
+          {/* Drag and Drop */}
+          <div className="card">
+            <h2>✋ Drag & Drop</h2>
+            <div className="control-group">
+              <div
+                id="draggable"
+                className="draggable"
+                draggable
+                onDragStart={handleDragStart}
+              >
+                Drag Me
+              </div>
+            </div>
             <div
-              id="draggable"
-              className="draggable"
-              draggable
-              onDragStart={handleDragStart}
+              id="drop-zone"
+              className={`drop-zone ${isDragging ? 'active' : ''}`}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
             >
-              Drag Me
+              {isDragging ? 'Drop Here!' : 'Drop Zone'}
+            </div>
+            <div className="message-area" id="drop-msg">{actionMessage.drag}</div>
+          </div>
+
+          {/* File Upload */}
+          <div className="card">
+            <h2>📂 File Upload</h2>
+            <div className="control-group">
+              <label className="label">Choose a file to upload:</label>
+              <input
+                type="file"
+                id="file-upload"
+                className="input-field"
+                onChange={handleFileUpload}
+              />
+              <div className="message-area" id="upload-msg">{actionMessage.upload}</div>
             </div>
           </div>
-          <div
-            id="drop-zone"
-            className={`drop-zone ${isDragging ? 'active' : ''}`}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-          >
-            {isDragging ? 'Drop Here!' : 'Drop Zone'}
-          </div>
-          <div className="message-area" id="drop-msg">{actionMessage.drag}</div>
-        </div>
 
-        {/* File Upload */}
-        <div className="card">
-          <h2>📂 File Upload</h2>
-          <div className="control-group">
-            <label className="label">Choose a file to upload:</label>
-            <input
-              type="file"
-              id="file-upload"
-              className="input-field"
-              onChange={handleFileUpload}
-            />
-            <div className="message-area" id="upload-msg">{actionMessage.upload}</div>
+          {/* Hover */}
+          <div className="card">
+            <h2>👻 Hover</h2>
+            <div
+              id="hover-area"
+              className="drop-zone"
+              onMouseEnter={() => updateMessage('hover', 'You are hovering!')}
+              onMouseLeave={() => updateMessage('hover', 'Hover left!')}
+              style={{ borderColor: actionMessage.hover === 'You are hovering!' ? 'var(--primary-color)' : '' }}
+            >
+              {actionMessage.hover}
+            </div>
           </div>
-        </div>
 
-        {/* Hover */}
-        <div className="card">
-          <h2>👻 Hover</h2>
-          <div
-            id="hover-area"
-            className="drop-zone"
-            onMouseEnter={() => updateMessage('hover', 'You are hovering!')}
-            onMouseLeave={() => updateMessage('hover', 'Hover left!')}
-            style={{ borderColor: actionMessage.hover === 'You are hovering!' ? 'var(--primary-color)' : '' }}
-          >
-            {actionMessage.hover}
+          {/* Native Alerts & Modals */}
+          <div className="card">
+            <h2>🚨 Alerts & Modals</h2>
+            <div className="control-group">
+              <button
+                id="alert-btn"
+                className="btn btn-primary"
+                onClick={() => {
+                  window.alert('This is a simple Alert!')
+                  updateMessage('popup', 'Alert Closed')
+                }}
+              >
+                Trigger Alert
+              </button>
+            </div>
+            <div className="control-group">
+              <button
+                id="confirm-btn"
+                className="btn btn-secondary"
+                onClick={() => {
+                  const result = window.confirm('Do you confirm this action?')
+                  updateMessage('popup', result ? 'Confirmed!' : 'Cancelled!')
+                }}
+              >
+                Trigger Confirm
+              </button>
+            </div>
+            <div className="control-group">
+              <button
+                id="prompt-btn"
+                className="btn btn-secondary"
+                onClick={() => {
+                  const result = window.prompt('Enter your name:')
+                  updateMessage('popup', result ? `Hello ${result}!` : 'No input')
+                }}
+              >
+                Trigger Prompt
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Native Alerts & Modals */}
-        <div className="card">
-          <h2>🚨 Alerts & Modals</h2>
-          <div className="control-group">
-            <button
-              id="alert-btn"
-              className="btn btn-primary"
-              onClick={() => {
-                window.alert('This is a simple Alert!')
-                updateMessage('popup', 'Alert Closed')
+          {/* Duplicate Locators */}
+          <div className="card">
+            <h2>🔍 Locator Strategies</h2>
+            <p className="label">These buttons have exact same text "Home" and class.</p>
+            <div className="control-group" style={{ flexDirection: 'row', gap: '1rem' }}>
+              <button
+                className="btn duplicate-btn"
+                style={{ backgroundColor: '#1f6feb', color: 'white' }}
+                onClick={() => updateMessage('locator', 'Blue Home Clicked!')}
+              >
+                Home
+              </button>
+              <button
+                className="btn duplicate-btn"
+                style={{ backgroundColor: '#d29922', color: 'black' }}
+                onClick={() => updateMessage('locator', 'Yellow Home Clicked!')}
+              >
+                Home
+              </button>
+            </div>
+            <div className="message-area" id="locator-msg">{actionMessage.locator || 'Click a Home button'}</div>
+          </div>
+
+          {/* iFrame */}
+          <div className="card" style={{ gridColumn: '1 / -1' }}>
+            <h2>🖼️ iFrames</h2>
+            <p className="label">The content below is inside an iframe.</p>
+            <iframe
+              id="test-iframe"
+              src="/iframe-content.html"
+              style={{
+                width: '100%',
+                height: '300px',
+                border: '2px solid var(--border-color)',
+                borderRadius: 'var(--radius-sm)'
               }}
-            >
-              Trigger Alert
-            </button>
+              title="Test iFrame"
+            ></iframe>
           </div>
-          <div className="control-group">
-            <button
-              id="confirm-btn"
-              className="btn btn-secondary"
-              onClick={() => {
-                const result = window.confirm('Do you confirm this action?')
-                updateMessage('popup', result ? 'Confirmed!' : 'Cancelled!')
-              }}
-            >
-              Trigger Confirm
-            </button>
-          </div>
-          <div className="control-group">
-            <button
-              id="prompt-btn"
-              className="btn btn-secondary"
-              onClick={() => {
-                const result = window.prompt('Enter your name:')
-                updateMessage('popup', result ? `Hello ${result}!` : 'No input')
-              }}
-            >
-              Trigger Prompt
-            </button>
-          </div>
-        </div>
 
-        {/* Duplicate Locators */}
-        <div className="card">
-          <h2>🔍 Locator Strategies</h2>
-          <p className="label">These buttons have exact same text "Home" and class.</p>
-          <div className="control-group" style={{ flexDirection: 'row', gap: '1rem' }}>
-            <button
-              className="btn duplicate-btn"
-              style={{ backgroundColor: '#1f6feb', color: 'white' }}
-              onClick={() => updateMessage('locator', 'Blue Home Clicked!')}
-            >
-              Home
-            </button>
-            <button
-              className="btn duplicate-btn"
-              style={{ backgroundColor: '#d29922', color: 'black' }}
-              onClick={() => updateMessage('locator', 'Yellow Home Clicked!')}
-            >
-              Home
-            </button>
-          </div>
-          <div className="message-area" id="locator-msg">{actionMessage.locator || 'Click a Home button'}</div>
-        </div>
-
-        {/* iFrame */}
-        <div className="card" style={{ gridColumn: '1 / -1' }}>
-          <h2>🖼️ iFrames</h2>
-          <p className="label">The content below is inside an iframe.</p>
-          <iframe
-            id="test-iframe"
-            src="/iframe-content.html"
-            style={{
-              width: '100%',
-              height: '300px',
-              border: '2px solid var(--border-color)',
-              borderRadius: 'var(--radius-sm)'
-            }}
-            title="Test iFrame"
-          ></iframe>
-        </div>
-
-        {/* Browser Tabs & Windows */}
-        <div className="card">
-          <h2>📑 Windows & Tabs</h2>
-          <div className="control-group">
-            {/* Using an anchor tag with target="_blank" is the most common way a new tab is opened in live sites.
+          {/* Browser Tabs & Windows */}
+          <div className="card">
+            <h2>📑 Windows & Tabs</h2>
+            <div className="control-group">
+              {/* Using an anchor tag with target="_blank" is the most common way a new tab is opened in live sites.
                 Playwright handles this as a popup event. */}
-            <a
-              id="new-tab-btn"
-              className="btn btn-primary"
-              href="/sample.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none' }}
-            >
-              Open New Tab (Link)
-            </a>
-          </div>
-          <div className="control-group">
-            <button
-              id="new-window-btn"
-              className="btn btn-secondary"
-              onClick={() => {
-                // Opening a window with specific features forces a popup window behavior
-                const features = 'popup=yes,width=600,height=400,resizable=yes,scrollbars=yes,status=no,location=no';
-                window.open('/sample.html', 'newwindow', features);
-              }}
-            >
-              Open New Window (Popup)
-            </button>
-          </div>
-          <p className="label">Test <code>page.waitForEvent('popup')</code> with these common patterns.</p>
-        </div>
-
-        {/* Specific Delayed Action */}
-        <div className="card">
-          <h2>⏳ Timed Actions</h2>
-          <p className="label">This action takes 3 seconds (plus your input delay).</p>
-          <button
-            id="submit-delay"
-            className="btn btn-primary"
-            onClick={handleDelayedAction}
-          >
-            Start Delayed Process
-          </button>
-          <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
-        </div>
-
-      </div>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3 id="modal-title">Simple Modal</h3>
-            <p id="modal-text">This is a custom modal popup.</p>
-            <button
-              id="close-modal-btn"
-              className="btn btn-primary"
-              onClick={() => setShowModal(false)}
-            >
-              Close Modal
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Registration Success Modal */}
-      {showRegistrationModal && (
-        <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
-            <p>Your account has been created successfully.</p>
-            <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
-              <p><strong>Email:</strong> {regForm.email}</p>
+              <a
+                id="new-tab-btn"
+                className="btn btn-primary"
+                href="/sample.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                Open New Tab (Link)
+              </a>
             </div>
-            <button
-              className="btn btn-primary"
-              onClick={() => setShowRegistrationModal(false)}
-            >
-              OK
-            </button>
+            <div className="control-group">
+              <button
+                id="new-window-btn"
+                className="btn btn-secondary"
+                onClick={() => {
+                  // Opening a window with specific features forces a popup window behavior
+                  const features = 'popup=yes,width=600,height=400,resizable=yes,scrollbars=yes,status=no,location=no';
+                  window.open('/sample.html', 'newwindow', features);
+                }}
+              >
+                Open New Window (Popup)
+              </button>
+            </div>
+            <p className="label">Test <code>page.waitForEvent('popup')</code> with these common patterns.</p>
           </div>
-        </div>
-      )}
 
-      {/* Toast Container */}
-      <div className="toast-container">
-        {toasts.map(toast => (
-          <div key={toast.id} className="toast">
-            <span>✅ {toast.msg}</span>
+          {/* Specific Delayed Action */}
+          <div className="card">
+            <h2>⏳ Timed Actions</h2>
+            <p className="label">This action takes 3 seconds (plus your input delay).</p>
+            <button
+              id="submit-delay"
+              className="btn btn-primary"
+              onClick={handleDelayedAction}
+            >
+              Start Delayed Process
+            </button>
+            <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
           </div>
-        ))}
+
+        </div>
+
+        {/* Modal */}
+        {showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3 id="modal-title">Simple Modal</h3>
+              <p id="modal-text">This is a custom modal popup.</p>
+              <button
+                id="close-modal-btn"
+                className="btn btn-primary"
+                onClick={() => setShowModal(false)}
+              >
+                Close Modal
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Registration Success Modal */}
+        {showRegistrationModal && (
+          <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
+              <p>Your account has been created successfully.</p>
+              <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
+                <p><strong>Email:</strong> {regForm.email}</p>
+              </div>
+              <button
+                className="btn btn-primary"
+                onClick={() => setShowRegistrationModal(false)}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Toast Container */}
+        <div className="toast-container">
+          {toasts.map(toast => (
+            <div key={toast.id} className="toast">
+              <span>✅ {toast.msg}</span>
+            </div>
+          ))}
+        </div>
+
+        <footer className="footer">
+          <div className="footer-content">
+            <div className="footer-links">
+              <a href="#" className="footer-link">Terms of Service</a>
+              <a href="#" className="footer-link">Privacy Policy</a>
+            </div>
+            <p className="footer-copy">© {new Date().getFullYear()} learnwithanimesh. All rights reserved.</p>
+          </div>
+        </footer>
+
       </div>
-    </div>
+    </>
   )
 }
 
