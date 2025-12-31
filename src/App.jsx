@@ -134,6 +134,31 @@ const HomePlayground = () => {
   // Drag State
   const [isDragging, setIsDragging] = useState(false)
 
+  // Web Table State
+  const [tableData, setTableData] = useState([
+    { id: 1, firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', dob: '1990-05-15' },
+    { id: 2, firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', dob: '1985-11-20' },
+    { id: 3, firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', dob: '1992-02-10' },
+  ])
+  const [newRow, setNewRow] = useState({ firstName: '', lastName: '', email: '', dob: '' })
+
+  const handleAddRow = (e) => {
+    e.preventDefault()
+    if (!newRow.firstName || !newRow.lastName || !newRow.email || !newRow.dob) {
+      updateMessage('input', 'Please fill all table fields')
+      return
+    }
+    const id = tableData.length > 0 ? Math.max(...tableData.map(r => r.id)) + 1 : 1
+    setTableData([...tableData, { ...newRow, id }])
+    setNewRow({ firstName: '', lastName: '', email: '', dob: '' })
+    updateMessage('input', 'Row added to table')
+  }
+
+  const handleDeleteRow = (id) => {
+    setTableData(tableData.filter(row => row.id !== id))
+    updateMessage('input', `Row ${id} deleted`)
+  }
+
   const addToast = (msg) => {
     const id = Date.now() + Math.random()
     setToasts(prev => [...prev, { id, msg }])
@@ -632,6 +657,92 @@ const HomePlayground = () => {
             >
               Open New Window (Popup)
             </button>
+          </div>
+        </div>
+
+        {/* Web Table */}
+        <div className="card" style={{ gridColumn: '1 / -1' }}>
+          <h2>📊 Web Table</h2>
+          <p className="label">Dynamic table with add/delete functionality.</p>
+
+          <form className="add-row-form" onSubmit={handleAddRow}>
+            <div>
+              <label className="label">First Name</label>
+              <input
+                className="input-field"
+                value={newRow.firstName}
+                onChange={e => setNewRow({ ...newRow, firstName: e.target.value })}
+                placeholder="First Name"
+              />
+            </div>
+            <div>
+              <label className="label">Last Name</label>
+              <input
+                className="input-field"
+                value={newRow.lastName}
+                onChange={e => setNewRow({ ...newRow, lastName: e.target.value })}
+                placeholder="Last Name"
+              />
+            </div>
+            <div>
+              <label className="label">Email</label>
+              <input
+                className="input-field"
+                value={newRow.email}
+                onChange={e => setNewRow({ ...newRow, email: e.target.value })}
+                placeholder="Email"
+                type="email"
+              />
+            </div>
+            <div>
+              <label className="label">Date of Birth</label>
+              <input
+                className="input-field"
+                value={newRow.dob}
+                onChange={e => setNewRow({ ...newRow, dob: e.target.value })}
+                type="date"
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">Add Row</button>
+          </form>
+
+          <div className="table-container">
+            <table className="web-table" id="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Date of Birth</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableData.length === 0 ? (
+                  <tr><td colSpan="6" style={{ textAlign: 'center' }}>No data available</td></tr>
+                ) : (
+                  tableData.map(row => (
+                    <tr key={row.id}>
+                      <td>{row.id}</td>
+                      <td>{row.firstName}</td>
+                      <td>{row.lastName}</td>
+                      <td>{row.email}</td>
+                      <td>{row.dob}</td>
+                      <td>
+                        <button
+                          className="action-btn"
+                          onClick={() => handleDeleteRow(row.id)}
+                          title="Delete Row"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
