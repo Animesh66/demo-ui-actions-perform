@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, Route, Routes, NavLink, Navigate, useLocation } from 'react-router-dom'
 import './App.css'
 
@@ -233,6 +233,71 @@ const HomePlayground = () => {
       setToasts(prev => prev.filter(t => t.id !== id))
     }, 3000)
   }
+
+  // Shadow DOM Ref
+  const shadowHostRef = useRef(null);
+
+  useEffect(() => {
+    if (shadowHostRef.current && !shadowHostRef.current.shadowRoot) {
+      const shadowRoot = shadowHostRef.current.attachShadow({ mode: 'open' });
+
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <style>
+          .shadow-box {
+            padding: 15px;
+            background-color: #161b22; 
+            border: 2px dashed #58a6ff;
+            border-radius: 6px;
+            color: #c9d1d9;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          }
+          h3 { margin-top: 0; color: #58a6ff; }
+          .shadow-btn {
+            margin-top: 10px;
+            padding: 6px 16px;
+            background-color: #238636;
+            color: white;
+            border: 1px solid rgba(240, 246, 252, 0.1);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          .shadow-btn:hover { background-color: #2ea043; }
+          .shadow-input {
+             margin-top: 10px;
+             padding: 5px 12px;
+             border-radius: 6px;
+             border: 1px solid #30363d;
+             background: #0d1117;
+             color: #c9d1d9;
+             outline: none;
+          } 
+          .shadow-input:focus { border-color: #58a6ff; }
+        </style>
+        <div class="shadow-box">
+          <h3>I am inside Shadow DOM</h3>
+          <input type="text" id="shadow-input" class="shadow-input" placeholder="Type in Shadow DOM" />
+          <br/>
+          <button id="shadow-btn" class="shadow-btn">Shadow Click</button>
+        </div>
+      `;
+      shadowRoot.appendChild(div);
+
+      const btn = shadowRoot.getElementById('shadow-btn');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          // Visual feedback inside shadow DOM
+          const box = shadowRoot.querySelector('.shadow-box');
+          const originalBg = box.style.backgroundColor;
+          box.style.backgroundColor = '#1f6feb';
+          setTimeout(() => box.style.backgroundColor = originalBg, 300);
+        });
+      }
+    }
+  }, []);
 
   const handleWithDelay = async (actionFn) => {
     if (delay > 0) {
@@ -603,6 +668,13 @@ const HomePlayground = () => {
           >
             {actionMessage.hover}
           </div>
+        </div>
+
+        {/* Shadow DOM */}
+        <div className="card">
+          <h2>🌑 Shadow DOM</h2>
+          <p className="label">The button key and input below are inside a Shadow Root.</p>
+          <div id="shadow-host" ref={shadowHostRef}></div>
         </div>
 
         {/* Native Alerts & Modals */}
