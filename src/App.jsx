@@ -1,8 +1,31 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, Route, Routes, NavLink, Navigate, useLocation } from 'react-router-dom'
+import { Link, Route, Routes, NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('auth_user')
+    const token = sessionStorage.getItem('auth_token')
+    if (user && token) {
+      setCurrentUser(user)
+    }
+  }, [])
+
+  const handleLoginSuccess = (user) => {
+    setCurrentUser(user)
+    navigate('/home')
+  }
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('auth_user')
+    sessionStorage.removeItem('auth_token')
+    setCurrentUser(null)
+    navigate('/login')
+  }
+
   return (
     <>
       <nav className="navbar">
@@ -15,8 +38,28 @@ function App() {
             <li><NavLink to="/home" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Home</NavLink></li>
             <li><NavLink to="/about-us" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About Us</NavLink></li>
             <li><NavLink to="/contact-us" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Contact Us</NavLink></li>
-            <li><NavLink to="/login" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Login</NavLink></li>
-            <li><NavLink to="/register" className={({ isActive }) => `nav-link btn btn-primary ${isActive ? 'active' : ''}`} style={{ padding: '0.4rem 1rem' }}>Register</NavLink></li>
+
+            {currentUser ? (
+              <>
+                <li style={{ display: 'flex', alignItems: 'center', color: 'var(--text-primary)', fontWeight: 500 }}>
+                  Welcome, {currentUser}
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="nav-link"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li><NavLink to="/login" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Login</NavLink></li>
+                <li><NavLink to="/register" className={({ isActive }) => `nav-link btn btn-primary ${isActive ? 'active' : ''}`} style={{ padding: '0.4rem 1rem' }}>Register</NavLink></li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
@@ -35,7 +78,7 @@ function App() {
           <Route path="/home" element={<HomePlayground />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login onLogin={handleLoginSuccess} />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
 
@@ -71,20 +114,70 @@ const ContactUs = () => (
   </div>
 )
 
-const Login = () => (
-  <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
-    <h2>Login</h2>
-    <div className="control-group">
-      <label className="label">Username</label>
-      <input type="text" className="input-field" placeholder="Enter username" />
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setError('')
+    setIsLoading(true)
+
+    // Simulate API call delay
+    setTimeout(() => {
+      if (username === 'test' && password === 'test@1') {
+        const token = 'Bearer ' + Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2)
+        sessionStorage.setItem('auth_token', token)
+        sessionStorage.setItem('auth_user', username)
+        onLogin(username)
+      } else {
+        setError('Invalid username or password')
+        setIsLoading(false)
+      }
+    }, 500)
+  }
+
+  return (
+    <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="control-group">
+          <label className="label">Username</label>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="control-group">
+          <label className="label">Password</label>
+          <input
+            type="password"
+            className="input-field"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error && <div style={{ color: 'var(--error-color)', marginBottom: '1rem' }}>{error}</div>}
+        <button
+          className="btn btn-primary"
+          style={{ marginTop: '1rem', width: '100%' }}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
+      <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+        Use <strong>test</strong> / <strong>test@1</strong>
+      </p>
     </div>
-    <div className="control-group">
-      <label className="label">Password</label>
-      <input type="password" className="input-field" placeholder="Enter password" />
-    </div>
-    <button className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }}>Login</button>
-  </div>
-)
+  )
+}
 
 const RegisterPage = () => (
   <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
