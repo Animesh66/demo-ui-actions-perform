@@ -136,27 +136,94 @@ const HomePlayground = () => {
 
   // Web Table State
   const [tableData, setTableData] = useState([
-    { id: 1, firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', dob: '1990-05-15' },
-    { id: 2, firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', dob: '1985-11-20' },
-    { id: 3, firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', dob: '1992-02-10' },
+    { id: 1, firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', orderId: 'ORD-001', price: '$25.00' },
+    { id: 2, firstName: 'Bob', lastName: 'Johnson', email: 'bob@example.com', orderId: 'ORD-002', price: '$40.50' },
+    { id: 3, firstName: 'Charlie', lastName: 'Brown', email: 'charlie@example.com', orderId: 'ORD-003', price: '$15.99' },
+    { id: 4, firstName: 'David', lastName: 'Wilson', email: 'david@example.com', orderId: 'ORD-004', price: '$120.00' },
+    { id: 5, firstName: 'Eve', lastName: 'Davis', email: 'eve@example.com', orderId: 'ORD-005', price: '$75.25' },
+    { id: 6, firstName: 'Frank', lastName: 'Miller', email: 'frank@example.com', orderId: 'ORD-006', price: '$10.00' },
+    { id: 7, firstName: 'Grace', lastName: 'Taylor', email: 'grace@example.com', orderId: 'ORD-007', price: '$55.00' },
+    { id: 8, firstName: 'Henry', lastName: 'Anderson', email: 'henry@example.com', orderId: 'ORD-008', price: '$99.99' },
+    { id: 9, firstName: 'Ivy', lastName: 'Thomas', email: 'ivy@example.com', orderId: 'ORD-009', price: '$35.50' },
+    { id: 10, firstName: 'Jack', lastName: 'White', email: 'jack@example.com', orderId: 'ORD-010', price: '$60.00' },
   ])
-  const [newRow, setNewRow] = useState({ firstName: '', lastName: '', email: '', dob: '' })
+
+  const [newRow, setNewRow] = useState({ firstName: '', lastName: '', email: '', price: '' })
+  const [editingRowId, setEditingRowId] = useState(null)
+  const [editFormData, setEditFormData] = useState({ firstName: '', lastName: '', email: '', orderId: '', price: '' })
 
   const handleAddRow = (e) => {
     e.preventDefault()
-    if (!newRow.firstName || !newRow.lastName || !newRow.email || !newRow.dob) {
-      updateMessage('input', 'Please fill all table fields')
+    if (!newRow.firstName || !newRow.email || !newRow.price) {
+      updateMessage('input', 'Please fill all mandatory fields (First Name, Email, Price)')
       return
     }
     const id = tableData.length > 0 ? Math.max(...tableData.map(r => r.id)) + 1 : 1
-    setTableData([...tableData, { ...newRow, id }])
-    setNewRow({ firstName: '', lastName: '', email: '', dob: '' })
-    updateMessage('input', 'Row added to table')
+    // Auto-generate Order ID
+    const generatedOrderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`
+    // Auto-formatting price if missing $
+    const formattedPrice = newRow.price.startsWith('$') ? newRow.price : `$${newRow.price}`
+
+    setTableData([...tableData, { ...newRow, orderId: generatedOrderId, price: formattedPrice, id }])
+    setNewRow({ firstName: '', lastName: '', email: '', price: '' })
+    updateMessage('input', 'Row added with Order ID ' + generatedOrderId)
   }
 
   const handleDeleteRow = (id) => {
     setTableData(tableData.filter(row => row.id !== id))
     updateMessage('input', `Row ${id} deleted`)
+  }
+
+  const handleEditClick = (row) => {
+    setEditingRowId(row.id)
+    setEditFormData({
+      firstName: row.firstName,
+      lastName: row.lastName,
+      email: row.email,
+      orderId: row.orderId,
+      price: row.price
+    })
+  }
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target
+    setEditFormData({ ...editFormData, [name]: value })
+  }
+
+  const handleSaveEdit = (id) => {
+    setTableData(tableData.map(row =>
+      row.id === id ? { ...row, ...editFormData } : row
+    ))
+    setEditingRowId(null)
+    updateMessage('input', `Row ${id} updated`)
+  }
+
+  const handleCancelEdit = () => {
+    setEditingRowId(null)
+  }
+
+  // Row Drag Handlers for Reordering
+  const handleRowDragStart = (e, index) => {
+    e.dataTransfer.setData('row-index', index)
+    // Don't set global isDragging to interfere with other drag drop
+  }
+
+  const handleRowDragOver = (e) => {
+    e.preventDefault() // Necessary to allow dropping
+  }
+
+  const handleRowDrop = (e, dropIndex) => {
+    e.preventDefault()
+    const startIndex = Number(e.dataTransfer.getData('row-index'))
+    if (isNaN(startIndex)) return
+
+    if (startIndex === dropIndex) return
+
+    const updatedData = [...tableData]
+    const [movedRow] = updatedData.splice(startIndex, 1)
+    updatedData.splice(dropIndex, 0, movedRow)
+    setTableData(updatedData)
+    updateMessage('input', `Row moved from ${startIndex + 1} to ${dropIndex + 1}`)
   }
 
   const addToast = (msg) => {
@@ -662,12 +729,12 @@ const HomePlayground = () => {
 
         {/* Web Table */}
         <div className="card" style={{ gridColumn: '1 / -1' }}>
-          <h2>📊 Web Table</h2>
+          <h2>📊 Customer Order Table</h2>
           <p className="label">Dynamic table with add/delete functionality.</p>
 
           <form className="add-row-form" onSubmit={handleAddRow}>
             <div>
-              <label className="label">First Name</label>
+              <label className="label">First Name <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
                 className="input-field"
                 value={newRow.firstName}
@@ -676,7 +743,7 @@ const HomePlayground = () => {
               />
             </div>
             <div>
-              <label className="label">Last Name</label>
+              <label className="label">Last Name (Optional)</label>
               <input
                 className="input-field"
                 value={newRow.lastName}
@@ -685,7 +752,7 @@ const HomePlayground = () => {
               />
             </div>
             <div>
-              <label className="label">Email</label>
+              <label className="label">Email <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
                 className="input-field"
                 value={newRow.email}
@@ -695,12 +762,21 @@ const HomePlayground = () => {
               />
             </div>
             <div>
-              <label className="label">Date of Birth</label>
+              <label className="label">Order ID (Auto)</label>
               <input
                 className="input-field"
-                value={newRow.dob}
-                onChange={e => setNewRow({ ...newRow, dob: e.target.value })}
-                type="date"
+                value="Auto-generated"
+                disabled
+                style={{ backgroundColor: 'var(--surface-hover)', cursor: 'not-allowed', color: 'var(--text-secondary)' }}
+              />
+            </div>
+            <div>
+              <label className="label">Price ($) <span style={{ color: 'var(--error-color)' }}>*</span></label>
+              <input
+                className="input-field"
+                value={newRow.price}
+                onChange={e => setNewRow({ ...newRow, price: e.target.value })}
+                placeholder="$0.00"
               />
             </div>
             <button type="submit" className="btn btn-primary">Add Row</button>
@@ -714,29 +790,111 @@ const HomePlayground = () => {
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Email</th>
-                  <th>Date of Birth</th>
+                  <th>Order ID</th>
+                  <th>Price</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {tableData.length === 0 ? (
-                  <tr><td colSpan="6" style={{ textAlign: 'center' }}>No data available</td></tr>
+                  <tr><td colSpan="7" style={{ textAlign: 'center' }}>No data available</td></tr>
                 ) : (
-                  tableData.map(row => (
-                    <tr key={row.id}>
+                  tableData.map((row, index) => (
+                    <tr
+                      key={row.id}
+                      draggable={editingRowId === null}
+                      onDragStart={(e) => handleRowDragStart(e, index)}
+                      onDragOver={handleRowDragOver}
+                      onDrop={(e) => handleRowDrop(e, index)}
+                      style={{ cursor: editingRowId === null ? 'move' : 'default' }}
+                      title={editingRowId === null ? "Drag to reorder" : ""}
+                    >
                       <td>{row.id}</td>
-                      <td>{row.firstName}</td>
-                      <td>{row.lastName}</td>
-                      <td>{row.email}</td>
-                      <td>{row.dob}</td>
                       <td>
-                        <button
-                          className="action-btn"
-                          onClick={() => handleDeleteRow(row.id)}
-                          title="Delete Row"
-                        >
-                          Delete
-                        </button>
+                        {editingRowId === row.id ? (
+                          <input
+                            name="firstName"
+                            value={editFormData.firstName}
+                            onChange={handleEditChange}
+                            className="input-field"
+                            style={{ padding: '0.25rem' }}
+                          />
+                        ) : row.firstName}
+                      </td>
+                      <td>
+                        {editingRowId === row.id ? (
+                          <input
+                            name="lastName"
+                            value={editFormData.lastName}
+                            onChange={handleEditChange}
+                            className="input-field"
+                            style={{ padding: '0.25rem' }}
+                          />
+                        ) : row.lastName}
+                      </td>
+                      <td>
+                        {editingRowId === row.id ? (
+                          <input
+                            name="email"
+                            value={editFormData.email}
+                            onChange={handleEditChange}
+                            className="input-field"
+                            style={{ padding: '0.25rem' }}
+                          />
+                        ) : row.email}
+                      </td>
+                      <td>
+                        {/* Order ID is read-only */}
+                        <span style={{ color: 'var(--text-secondary)', fontFamily: 'monospace' }}>
+                          {row.orderId}
+                        </span>
+                      </td>
+                      <td>
+                        {editingRowId === row.id ? (
+                          <input
+                            name="price"
+                            value={editFormData.price}
+                            onChange={handleEditChange}
+                            className="input-field"
+                            style={{ padding: '0.25rem' }}
+                          />
+                        ) : row.price}
+                      </td>
+                      <td>
+                        {editingRowId === row.id ? (
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              className="action-btn"
+                              style={{ backgroundColor: 'rgba(46, 160, 67, 0.2)', color: 'var(--success-color)' }}
+                              onClick={() => handleSaveEdit(row.id)}
+                            >
+                              Save
+                            </button>
+                            <button
+                              className="action-btn"
+                              onClick={handleCancelEdit}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              className="action-btn"
+                              style={{ backgroundColor: 'rgba(31, 111, 235, 0.2)', color: '#58a6ff' }}
+                              onClick={() => handleEditClick(row)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="action-btn"
+                              onClick={() => handleDeleteRow(row.id)}
+                              title="Delete Row"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))
