@@ -537,40 +537,46 @@ const HomePlayground = () => {
           <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={handleRegistrationSubmit} noValidate>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <div style={{ flex: 1 }}>
-                <label className="label">First Name <span style={{ color: 'red' }}>*</span></label>
-                <input
-                  name="firstName"
-                  value={regForm.firstName}
-                  onChange={handleRegChange}
-                  className="input-field"
-                  placeholder="First Name"
-                  data-testid="firstname"
-                />
+                <label className="label">
+                  First Name <span style={{ color: 'red' }}>*</span>
+                  <input
+                    name="firstName"
+                    value={regForm.firstName}
+                    onChange={handleRegChange}
+                    className="input-field"
+                    placeholder="First Name"
+                    data-testid="firstname"
+                  />
+                </label>
               </div>
               <div style={{ flex: 1 }}>
-                <label className="label">Last Name <span style={{ color: 'red' }}>*</span></label>
-                <input
-                  name="lastName"
-                  value={regForm.lastName}
-                  onChange={handleRegChange}
-                  className="input-field"
-                  placeholder="Last Name"
-                  data-testid="lastname"
-                />
+                <label className="label">
+                  Last Name <span style={{ color: 'red' }}>*</span>
+                  <input
+                    name="lastName"
+                    value={regForm.lastName}
+                    onChange={handleRegChange}
+                    className="input-field"
+                    placeholder="Last Name"
+                    data-testid="lastname"
+                  />
+                </label>
               </div>
             </div>
 
             <div>
-              <label className="label">Email Address <span style={{ color: 'red' }}>*</span></label>
-              <input
-                name="email"
-                type="email"
-                value={regForm.email}
-                onChange={handleRegChange}
-                className="input-field"
-                placeholder="Email"
-                data-testid="email"
-              />
+              <label className="label">
+                Email Address <span style={{ color: 'red' }}>*</span>
+                <input
+                  name="email"
+                  type="email"
+                  value={regForm.email}
+                  onChange={handleRegChange}
+                  className="input-field"
+                  placeholder="Email"
+                  data-testid="email"
+                />
+              </label>
             </div>
 
             <label className="label">Phone Number</label>
@@ -598,28 +604,32 @@ const HomePlayground = () => {
             </div>
 
             <div>
-              <label className="label">Password <span style={{ color: 'red' }}>*</span></label>
-              <input
-                name="password"
-                type="password"
-                value={regForm.password}
-                onChange={handleRegChange}
-                className="input-field"
-                placeholder="Password"
-                data-testid="password"
-                aria-label="Password"
-              />
+              <label className="label">
+                Password <span style={{ color: 'red' }}>*</span>
+                <input
+                  name="password"
+                  type="password"
+                  value={regForm.password}
+                  onChange={handleRegChange}
+                  className="input-field"
+                  placeholder="Password"
+                  data-testid="password"
+                  aria-label="Password"
+                />
+              </label>
             </div>
             <div>
-              <label className="label">Retype Password</label>
-              <input
-                name="confirmPassword"
-                type="password"
-                value={regForm.confirmPassword}
-                onChange={handleRegChange}
-                className="input-field"
-                aria-label="Confirm Password"
-              />
+              <label className="label">
+                Retype Password
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  value={regForm.confirmPassword}
+                  onChange={handleRegChange}
+                  className="input-field"
+                  aria-label="Confirm Password"
+                />
+              </label>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
