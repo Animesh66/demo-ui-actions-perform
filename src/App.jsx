@@ -1126,6 +1126,25 @@ const HomePlayground = () => {
           <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
         </div>
 
+        {/* Images */}
+        <div className="card">
+          <h2>🖼️ Images</h2>
+          <p className="label">Sample image with alt text for testing.</p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <img
+              src="/logo.png"
+              alt="Animesh Logo with Blue Brain"
+              style={{
+                width: '150px',
+                height: '150px',
+                objectFit: 'contain',
+                borderRadius: 'var(--radius-md)',
+                boxShadow: 'var(--shadow-sm)'
+              }}
+            />
+          </div>
+        </div>
+
         {/* Settings */}
         <div className="card">
           <h2>⚙️ Configuration</h2>
