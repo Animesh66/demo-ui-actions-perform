@@ -543,6 +543,8 @@ const HomePlayground = () => {
                   value={regForm.firstName}
                   onChange={handleRegChange}
                   className="input-field"
+                  placeholder="First Name"
+                  data-testid="firstname"
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -552,6 +554,8 @@ const HomePlayground = () => {
                   value={regForm.lastName}
                   onChange={handleRegChange}
                   className="input-field"
+                  placeholder="Last Name"
+                  data-testid="lastname"
                 />
               </div>
             </div>
@@ -564,6 +568,8 @@ const HomePlayground = () => {
                 value={regForm.email}
                 onChange={handleRegChange}
                 className="input-field"
+                placeholder="Email"
+                data-testid="email"
               />
             </div>
 
@@ -599,6 +605,9 @@ const HomePlayground = () => {
                 value={regForm.password}
                 onChange={handleRegChange}
                 className="input-field"
+                placeholder="Password"
+                data-testid="password"
+                aria-label="Password"
               />
             </div>
             <div>
@@ -609,6 +618,7 @@ const HomePlayground = () => {
                 value={regForm.confirmPassword}
                 onChange={handleRegChange}
                 className="input-field"
+                aria-label="Confirm Password"
               />
             </div>
 
