@@ -626,7 +626,7 @@ const HomePlayground = () => {
             </div>
             <div>
               <label className="label">
-                Retype Password
+                Confirmation
                 <input
                   id="confirm-password"
                   name="confirmPassword"
@@ -634,7 +634,7 @@ const HomePlayground = () => {
                   value={regForm.confirmPassword}
                   onChange={handleRegChange}
                   className="input-field"
-                  aria-label="Confirm Password"
+                  aria-label="Confirmation"
                 />
               </label>
             </div>
@@ -949,7 +949,7 @@ const HomePlayground = () => {
 
           <form className="add-row-form" onSubmit={handleAddRow}>
             <div>
-              <label className="label">First Name <span style={{ color: 'var(--error-color)' }}>*</span></label>
+              <label className="label">Customer First Name <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
                 name="firstname-table"
                 className="input-field"
@@ -959,7 +959,7 @@ const HomePlayground = () => {
               />
             </div>
             <div>
-              <label className="label">Last Name (Optional)</label>
+              <label className="label">Customer Last Name (Optional)</label>
               <input
                 name="lastname-table"
                 className="input-field"
@@ -969,7 +969,7 @@ const HomePlayground = () => {
               />
             </div>
             <div>
-              <label className="label">Email <span style={{ color: 'var(--error-color)' }}>*</span></label>
+              <label className="label">Customer Email <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
                 name="email-table"
                 className="input-field"
