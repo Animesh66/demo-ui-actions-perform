@@ -951,34 +951,38 @@ const HomePlayground = () => {
             <div>
               <label className="label">First Name <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
+                name="firstname-table"
                 className="input-field"
                 value={newRow.firstName}
                 onChange={e => setNewRow({ ...newRow, firstName: e.target.value })}
-                placeholder="First Name"
+                placeholder="Enter first name"
               />
             </div>
             <div>
               <label className="label">Last Name (Optional)</label>
               <input
+                name="lastname-table"
                 className="input-field"
                 value={newRow.lastName}
                 onChange={e => setNewRow({ ...newRow, lastName: e.target.value })}
-                placeholder="Last Name"
+                placeholder="Enter last name"
               />
             </div>
             <div>
               <label className="label">Email <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
+                name="email-table"
                 className="input-field"
                 value={newRow.email}
                 onChange={e => setNewRow({ ...newRow, email: e.target.value })}
-                placeholder="Email"
+                placeholder="Enter email"
                 type="email"
               />
             </div>
             <div>
               <label className="label">Order ID (Auto)</label>
               <input
+                name="orderId-table"
                 className="input-field"
                 value="Auto-generated"
                 disabled
@@ -988,6 +992,7 @@ const HomePlayground = () => {
             <div>
               <label className="label">Price ($) <span style={{ color: 'var(--error-color)' }}>*</span></label>
               <input
+                name="price-table"
                 className="input-field"
                 value={newRow.price}
                 onChange={e => setNewRow({ ...newRow, price: e.target.value })}
