@@ -540,6 +540,7 @@ const HomePlayground = () => {
                 <label className="label">
                   First Name <span style={{ color: 'red' }}>*</span>
                   <input
+                    id="firstname"
                     name="firstName"
                     value={regForm.firstName}
                     onChange={handleRegChange}
@@ -553,6 +554,7 @@ const HomePlayground = () => {
                 <label className="label">
                   Last Name <span style={{ color: 'red' }}>*</span>
                   <input
+                    id="lastname"
                     name="lastName"
                     value={regForm.lastName}
                     onChange={handleRegChange}
@@ -568,6 +570,7 @@ const HomePlayground = () => {
               <label className="label">
                 Email Address <span style={{ color: 'red' }}>*</span>
                 <input
+                  id="email"
                   name="email"
                   type="email"
                   value={regForm.email}
@@ -582,6 +585,7 @@ const HomePlayground = () => {
             <label className="label">Phone Number</label>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <select
+                id="country-code"
                 name="countryCode"
                 value={regForm.countryCode}
                 onChange={handleRegChange}
@@ -594,6 +598,7 @@ const HomePlayground = () => {
                 <option value="+61">🇦🇺 +61</option>
               </select>
               <input
+                id="phoneNumber"
                 name="phoneNumber"
                 type="tel"
                 value={regForm.phoneNumber}
@@ -607,6 +612,7 @@ const HomePlayground = () => {
               <label className="label">
                 Password <span style={{ color: 'red' }}>*</span>
                 <input
+                  id="password"
                   name="password"
                   type="password"
                   value={regForm.password}
@@ -622,6 +628,7 @@ const HomePlayground = () => {
               <label className="label">
                 Retype Password
                 <input
+                  id="confirm-password"
                   name="confirmPassword"
                   type="password"
                   value={regForm.confirmPassword}
@@ -634,6 +641,7 @@ const HomePlayground = () => {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <input
+                id="term-checkbox"
                 type="checkbox"
                 name="termcheck"
                 checked={regForm.termcheck}
