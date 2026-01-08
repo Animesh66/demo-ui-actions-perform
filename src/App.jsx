@@ -680,7 +680,7 @@ const HomePlayground = () => {
               className="input-field"
               value={inputValue}
               onChange={handleInputChange}
-              placeholder="Start typing..."
+              placeholder="Type Text"
             />
             <div className="message-area" id="input-msg">{actionMessage.input}</div>
           </div>
