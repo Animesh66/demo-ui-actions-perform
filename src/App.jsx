@@ -194,6 +194,7 @@ const HomePlayground = () => {
     click: 'Waiting for action...',
     doubleClick: 'Waiting for action...',
     rightClick: 'Waiting for action...',
+    forceClick: 'Normal click blocked',
     hover: 'Hover over me!',
     drag: 'Waiting for drop...',
     input: 'Waiting for input...',
@@ -528,6 +529,26 @@ const HomePlayground = () => {
               Right Click Me
             </button>
             <div className="message-area" id="right-click-msg">{actionMessage.rightClick}</div>
+          </div>
+
+          <div className="control-group">
+            <div
+              style={{ display: 'inline-block', cursor: 'not-allowed' }}
+              onClick={() => updateMessage('forceClick', 'Normal click blocked! Automation force click required.')}
+            >
+              <button
+                id="force-click-btn"
+                className="btn btn-secondary"
+                style={{ pointerEvents: 'none' }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  updateMessage('forceClick', 'Force Click Success!')
+                }}
+              >
+                Force Click Me
+              </button>
+            </div>
+            <div className="message-area" id="force-click-msg">{actionMessage.forceClick}</div>
           </div>
         </div>
 
