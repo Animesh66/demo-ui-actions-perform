@@ -468,3 +468,15 @@
     transform: rotate(360deg);
   }
 }
+
+.processing-msg {
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+  background-color: rgba(121, 192, 255, 0.1);
+}
+
+.success-msg {
+  color: var(--success-color);
+  border-left-color: var(--success-color);
+  background-color: rgba(63, 185, 80, 0.1);
+}

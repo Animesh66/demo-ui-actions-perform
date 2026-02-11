@@ -213,6 +213,8 @@ const HomePlayground = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false)
   const [formError, setFormError] = useState('')
 
+  const [delayedStatus, setDelayedStatus] = useState('idle')
+
   // Registration Form State
   const [regForm, setRegForm] = useState({
     firstName: '',
@@ -457,8 +459,10 @@ const HomePlayground = () => {
   }
 
   const handleDelayedAction = () => {
+    setDelayedStatus('processing')
     updateMessage('delayed', 'Submitting the form please wait this may take some time')
     setTimeout(() => {
+      setDelayedStatus('success')
       updateMessage('delayed', 'Form Submitted successfully')
     }, 3000 + (delay * 1000)) // Base 3s + user delay
   }
@@ -1157,7 +1161,12 @@ const HomePlayground = () => {
           >
             Submit Form
           </button>
-          <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
+          <div
+            className={`message-area ${delayedStatus === 'processing' ? 'processing-msg' : delayedStatus === 'success' ? 'success-msg' : ''}`}
+            id={delayedStatus === 'processing' ? 'processing-msg' : delayedStatus === 'success' ? 'success-msg' : 'delayed-msg'}
+          >
+            {actionMessage.delayed}
+          </div>
         </div>
 
         {/* Images */}
