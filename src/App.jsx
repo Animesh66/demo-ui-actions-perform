@@ -464,7 +464,7 @@ const HomePlayground = () => {
     setTimeout(() => {
       setDelayedStatus('success')
       updateMessage('delayed', 'Form Submitted successfully')
-    }, 3000 + (delay * 1000)) // Base 3s + user delay
+    }, 7000 + (delay * 1000)) // Base 7s + user delay
   }
 
   const handleRegistrationSubmit = (e) => {
@@ -1153,7 +1153,7 @@ const HomePlayground = () => {
         {/* Specific Delayed Action */}
         <div className="card">
           <h2>⏳ Timed Actions</h2>
-          <p className="label">This action takes 3 seconds (plus your input delay).</p>
+          <p className="label">This action takes 7 seconds (plus your input delay).</p>
           <button
             id="submit-delay"
             className="btn btn-primary"
