@@ -457,9 +457,9 @@ const HomePlayground = () => {
   }
 
   const handleDelayedAction = () => {
-    updateMessage('delayed', 'Action Started... Wait...')
+    updateMessage('delayed', 'Submitting the form please wait this may take some time')
     setTimeout(() => {
-      updateMessage('delayed', 'Delayed Action Finished!')
+      updateMessage('delayed', 'Form Submitted successfully')
     }, 3000 + (delay * 1000)) // Base 3s + user delay
   }
 
@@ -1155,7 +1155,7 @@ const HomePlayground = () => {
             className="btn btn-primary"
             onClick={handleDelayedAction}
           >
-            Start Delayed Process
+            Submit Form
           </button>
           <div className="message-area" id="delayed-msg">{actionMessage.delayed}</div>
         </div>
