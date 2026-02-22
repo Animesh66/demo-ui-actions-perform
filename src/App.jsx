@@ -1232,7 +1232,7 @@ const HomePlayground = () => {
         showRegistrationModal && (
           <div className="modal-overlay" onClick={() => setShowRegistrationModal(false)}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <h3 style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
+              <h3 id="success-msg" style={{ color: 'var(--success-color)' }}>🎉 Registration Successful!</h3>
               <p>Your account has been created successfully.</p>
               <div style={{ textAlign: 'left', margin: '1rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                 <p><strong>Name:</strong> {regForm.firstName} {regForm.lastName}</p>
