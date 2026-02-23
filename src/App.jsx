@@ -513,7 +513,7 @@ const HomePlayground = () => {
       <div className="section-grid">
         {/* Click Actions */}
         <div className="card">
-          <h2>🖱️ Mouse Clicks</h2>
+          <h2>Mouse Clicks</h2>
           <div className="control-group">
             <button id="click-btn" className="btn btn-primary" onClick={handleSingleClick}>
               Single Click Me
@@ -558,7 +558,7 @@ const HomePlayground = () => {
 
         {/* Registration Form */}
         <div className="card" style={{ gridRow: 'span 2' }}>
-          <h2>📝 Registration Form</h2>
+          <h2>Registration Form</h2>
           <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={handleRegistrationSubmit} noValidate>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <div style={{ flex: 1 }}>
@@ -617,10 +617,10 @@ const HomePlayground = () => {
                 className="input-field"
                 style={{ width: '100px' }}
               >
-                <option value="+1">🇺🇸 +1</option>
-                <option value="+44">🇬🇧 +44</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
                 <option value="+91">🇮🇳 +91</option>
-                <option value="+61">🇦🇺 +61</option>
+                <option value="+61">+61</option>
               </select>
               <input
                 id="phoneNumber"
@@ -696,7 +696,7 @@ const HomePlayground = () => {
 
         {/* Input Fields */}
         <div className="card">
-          <h2>⌨️ Input Fields</h2>
+          <h2>Input Fields</h2>
           <div className="control-group">
             <label className="label">Type something:</label>
             <input
@@ -713,7 +713,7 @@ const HomePlayground = () => {
 
         {/* Dropdowns & Toggles */}
         <div className="card">
-          <h2>🔘 Toggles & Choices</h2>
+          <h2>Toggles & Choices</h2>
 
           <div className="control-group">
             <label className="label">Select Option:</label>
@@ -768,7 +768,7 @@ const HomePlayground = () => {
 
         {/* Drag and Drop */}
         <div className="card">
-          <h2>✋ Drag & Drop</h2>
+          <h2>Drag & Drop</h2>
           <div className="control-group">
             <div
               id="draggable"
@@ -792,7 +792,7 @@ const HomePlayground = () => {
 
         {/* File Upload */}
         <div className="card">
-          <h2>📂 File Upload</h2>
+          <h2>File Upload</h2>
           <div className="control-group">
             <label className="label">Choose a file to upload:</label>
             <input
@@ -807,7 +807,7 @@ const HomePlayground = () => {
 
         {/* Network Emulation */}
         <div className="card">
-          <h2>🌐 Network Simulation</h2>
+          <h2>Network Simulation</h2>
           <p className="label">Simulate a slow server response causing a delayed page load.</p>
           <button
             className="btn btn-primary"
@@ -826,7 +826,7 @@ const HomePlayground = () => {
 
         {/* Hover */}
         <div className="card">
-          <h2>👻 Hover</h2>
+          <h2>Hover</h2>
           <div
             id="hover-area"
             className="drop-zone"
@@ -840,14 +840,14 @@ const HomePlayground = () => {
 
         {/* Shadow DOM */}
         <div className="card">
-          <h2>🌑 Shadow DOM</h2>
+          <h2>Shadow DOM</h2>
           <p className="label">The button key and input below are inside a Shadow Root.</p>
           <div id="shadow-host" ref={shadowHostRef}></div>
         </div>
 
         {/* Native Alerts & Modals */}
         <div className="card">
-          <h2>🚨 Alerts & Modals</h2>
+          <h2>Alerts & Modals</h2>
           <div className="control-group">
             <button
               id="alert-btn"
@@ -897,7 +897,7 @@ const HomePlayground = () => {
 
         {/* Duplicate Locators */}
         <div className="card">
-          <h2>🔍 Locator Strategies</h2>
+          <h2>Locator Strategies</h2>
           <p className="label">These buttons have exact same text "Home" and class.</p>
           <div className="control-group" style={{ flexDirection: 'row', gap: '1rem' }}>
             <button
@@ -920,7 +920,7 @@ const HomePlayground = () => {
 
         {/* iFrame */}
         <div className="card" style={{ gridColumn: '1 / -1' }}>
-          <h2>🖼️ iFrames</h2>
+          <h2>iFrames</h2>
           <p className="label">The content below is inside an iframe.</p>
           <iframe
             id="test-iframe"
@@ -937,7 +937,7 @@ const HomePlayground = () => {
 
         {/* Browser Tabs & Windows */}
         <div className="card">
-          <h2>📑 Windows & Tabs</h2>
+          <h2>Windows & Tabs</h2>
           <div className="control-group">
             {/* Using an anchor tag with target="_blank" is the most common way a new tab is opened in live sites.
               Playwright handles this as a popup event. */}
@@ -969,7 +969,7 @@ const HomePlayground = () => {
 
         {/* Web Table */}
         <div className="card" style={{ gridColumn: '1 / -1' }}>
-          <h2>📊 Customer Order Table</h2>
+          <h2>Customer Order Table</h2>
           <p className="label">Dynamic table with add/delete functionality.</p>
 
           <form className="add-row-form" onSubmit={handleAddRow}>
@@ -1152,7 +1152,7 @@ const HomePlayground = () => {
 
         {/* Specific Delayed Action */}
         <div className="card">
-          <h2>⏳ Timed Actions</h2>
+          <h2>Timed Actions</h2>
           <p className="label">This action takes 7 seconds (plus your input delay).</p>
           <button
             id="submit-delay"
@@ -1171,7 +1171,7 @@ const HomePlayground = () => {
 
         {/* Images */}
         <div className="card">
-          <h2>🖼️ Images</h2>
+          <h2>Images</h2>
           <p className="label">Sample image with alt text for testing.</p>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img
@@ -1190,7 +1190,7 @@ const HomePlayground = () => {
 
         {/* Settings */}
         <div className="card">
-          <h2>⚙️ Configuration</h2>
+          <h2>Configuration</h2>
           <div className="control-group">
             <label className="label">Global Artificial Delay (seconds)</label>
             <input
@@ -1262,7 +1262,7 @@ const HomePlayground = () => {
       <div className="toast-container">
         {toasts.map(toast => (
           <div key={toast.id} className="toast">
-            <span>✅ {toast.msg}</span>
+            <span>{toast.msg}</span>
           </div>
         ))}
       </div>
