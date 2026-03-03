@@ -1047,6 +1047,7 @@ const HomePlayground = () => {
                   tableData.map((row, index) => (
                     <tr
                       key={row.id}
+                      className={index === 2 ? 'row-separator' : undefined}
                       draggable={editingRowId === null}
                       onDragStart={(e) => handleRowDragStart(e, index)}
                       onDragOver={handleRowDragOver}
