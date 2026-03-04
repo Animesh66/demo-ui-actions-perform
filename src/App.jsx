@@ -272,14 +272,12 @@ const HomePlayground = () => {
 
   const handleEditClick = (row) => {
     setEditingRowId(row.id)
-    // Start with empty strings so users only need to fill in the fields they want to update.
-    // Fields left blank will retain their original values on save.
     setEditFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      orderId: '',
-      price: ''
+      firstName: row.firstName,
+      lastName: row.lastName,
+      email: row.email,
+      orderId: row.orderId,
+      price: row.price
     })
   }
 
@@ -291,16 +289,9 @@ const HomePlayground = () => {
   const handleSaveEdit = (id) => {
     setTableData(tableData.map(row => {
       if (row.id !== id) return row
-      // Only update fields that have non-empty values in editFormData
-      // This allows users to update only specific fields (e.g., just email)
-      // while keeping original values for any fields left blank
-      const updatedFields = {}
-      Object.keys(editFormData).forEach(key => {
-        if (editFormData[key] !== undefined && editFormData[key].toString().trim() !== '') {
-          updatedFields[key] = editFormData[key]
-        }
-      })
-      return { ...row, ...updatedFields }
+      // Save all fields from editFormData as-is.
+      // The user sees pre-populated values and can change whichever they want.
+      return { ...row, ...editFormData }
     }))
     setEditingRowId(null)
     updateMessage('input', `Row ${id} updated`)
@@ -1075,9 +1066,7 @@ const HomePlayground = () => {
                             value={editFormData.firstName}
                             onChange={handleEditChange}
                             className="input-field"
-                            placeholder={row.firstName}
                             style={{ padding: '0.25rem' }}
-                            title="Leave blank to keep current value"
                           />
                         ) : row.firstName}
                       </td>
@@ -1088,9 +1077,7 @@ const HomePlayground = () => {
                             value={editFormData.lastName}
                             onChange={handleEditChange}
                             className="input-field"
-                            placeholder={row.lastName}
                             style={{ padding: '0.25rem' }}
-                            title="Leave blank to keep current value"
                           />
                         ) : row.lastName}
                       </td>
@@ -1101,9 +1088,7 @@ const HomePlayground = () => {
                             value={editFormData.email}
                             onChange={handleEditChange}
                             className="input-field"
-                            placeholder={row.email}
                             style={{ padding: '0.25rem' }}
-                            title="Leave blank to keep current value"
                           />
                         ) : row.email}
                       </td>
@@ -1120,9 +1105,7 @@ const HomePlayground = () => {
                             value={editFormData.price}
                             onChange={handleEditChange}
                             className="input-field"
-                            placeholder={row.price}
                             style={{ padding: '0.25rem' }}
-                            title="Leave blank to keep current value"
                           />
                         ) : row.price}
                       </td>
